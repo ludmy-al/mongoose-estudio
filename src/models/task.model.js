@@ -1,24 +1,25 @@
-import { Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 const taskSchema = new Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
     },
-    descriptionds: {
+    description: {
       type: String,
-      require: true,
+      required: true,
     },
     author: {
-      type: String,
+      type: Types.ObjectId,
       ref: "User",
-      require: true,
-      //unique: true,
+      required: true,
     },
   },
   {
-    timestamp: true,
+    timestamps: true,
     versionKey: false,
   },
 );
+
+export const TaskModel = model("Task", taskSchema);

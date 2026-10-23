@@ -1,41 +1,45 @@
-import { model, Schema } from "mongoose";
-import { UserModel } from "./";
-import { type, version } from "node:os";
+import { model, Schema, Types, version } from "mongoose";
 
 const userSchema = new Schema({
   username: {
-    type: string,
-    require: true,
+    type: String,
+    required: true,
     unique: true,
   },
   email: {
-    type: string,
-    require: true,
+    type: String,
+    required: true,
     unique: true,
   },
   password: {
-    type: string,
-    require: true,
+    type: String,
+    required: true,
   },
-  addreessed: [
+  adresses: [
     {
-      _id_false,
       street: {
-        type: string,
-        require: true,
+        type: String,
+        required: true,
       },
       city: {
-        type: string,
-        require: true,
+        type: String,
+        required: true,
       },
       country: {
-        type: string,
-        require: true,
+        type: String,
+        required: true,
       },
     },
   ],
+  role: [
+    {
+      type: Types.ObjectId,
+      ref: "Role",
+      required: true,
+    },
+  ],
+
+  versionKey: false,
 });
-{
-  versionKey: false;
-}
+
 export const UserModel = model("User", userSchema);
